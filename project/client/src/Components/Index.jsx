@@ -118,7 +118,7 @@ const IndexLoggedin = () => {
                                 </p>
                             </div>
                             <div className="mx-20">
-                                <a className="bg-green-700 px-2 py-1 rounded font-semibold text-white" href="#">Shop Now</a>
+                                <a className="bg-green-700 px-2 py-1 rounded font-semibold text-white" href="/users/shop">Shop Now</a>
                             </div>
                         </div>
                     </div>

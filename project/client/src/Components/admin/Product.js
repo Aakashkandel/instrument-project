@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/api';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Product() {
   const [products, setProducts] = useState([]);
@@ -52,7 +52,9 @@ export default function Product() {
           'x-access-token': localStorage.getItem('token')
         }
       });
-      console.log("i am here in delete");
+    setTimeout(() => {
+      toast.success('Product deleted successfully');
+    }, 100);
       console.log(response);
       getProducts();
     } catch (err) {
@@ -81,7 +83,7 @@ export default function Product() {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ml-10">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
           <thead className="bg-gray-100">
             <tr>
@@ -117,6 +119,7 @@ export default function Product() {
                 </td>
                 <td className="py-3 px-4 border-b text-center">
                   <div className="flex justify-center items-center space-x-4">
+                  <Link to={`../productedit/${product._id}`}> <i className="fa-solid fa-edit text-blue-600 text-xl cursor-pointer"></i></Link>
                     
                     <i
                       onClick={() => deleteproduct(product._id)}

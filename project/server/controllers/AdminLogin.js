@@ -1,19 +1,18 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const Admin = require('../models/AdminModel'); // Ensure your model import is correct
+const Admin = require('../models/AdminModel');
+const Vendor = require('../models/VendorModel');
+const User = require('../models/UserModel');
 
 const updateadmin = async (req, res) => {
     try {
-        // Sample admin details (in practice, these should come from req.body)
         const name = "Admin";
         const email = "admin@admin.com";
         const password = "Aakash12345";
 
-        // Hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Create new admin
         const date = new Date();
         const newAdmin = new Admin({
             name,
@@ -22,17 +21,11 @@ const updateadmin = async (req, res) => {
             date,
         });
 
-        // Save the admin to the database
         await newAdmin.save();
         console.log("Admin created");
 
-       
-       
-
-        // Return the token and success message
         res.status(201).json({
             message: "Admin created successfully",
-           
         });
 
     } catch (error) {
@@ -41,43 +34,33 @@ const updateadmin = async (req, res) => {
     }
 };
 
-
-
 const adminlogin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check if all fields are provided
         if (!email || !password) {
             return res.status(400).json({ message: "Please enter all fields" });
         }
 
-        //
         const admin = await Admin.findOne({ email });
 
-        // Check if admin exists
         if (!admin) {
             return res.status(400).json({ message: "Admin does not exist" });
         }
 
-        // Compare the provided password with the hashed password
         const isMatch = await bcrypt.compare(password, admin.password);
 
-        // Check if the password matches
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        // Create the payload for JWT
         const payload = {
-            id: admin._id, // Use admin._id for consistency
+            id: admin._id,
             email: admin.email
         };
 
-    
         const token = jwt.sign(payload, 'shhhh', { expiresIn: '1h' });
 
-        
         res.status(200).json({
             token,
             message: "Login success"
@@ -89,4 +72,90 @@ const adminlogin = async (req, res) => {
     }
 };
 
-module.exports = {adminlogin, updateadmin};
+const vendoredit = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const vendor = await Vendor.findById(id);
+        if (!vendor) {
+            return res.status(404).json({ message: 'Vendor not found' });
+        }
+        const updatedVendor = await Vendor.findByIdAndUpdate(
+            id, req.body, { new: true }
+        );
+
+        res.status(200).json(updatedVendor);
+    } catch (err) {
+        console.error('Error updating vendor:', err);
+        res.status(500).send('Server Error');
+    }
+};
+
+const vendorupdate = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const vendor = await Vendor.findById(id);
+        if (!vendor) {
+            return res.status(404).json({ message: 'Vendor not found' });
+        }
+        const updatedVendor = await Vendor.findByIdAndUpdate(
+            id, req.body, { new: true }
+        );
+
+        res.status(200).json(updatedVendor);
+    } catch (err) {
+        console.error('Error updating vendor:', err);
+        res.status(500).send('Server Error');
+    }
+};
+
+const getUserById = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json(user);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+const updateUserById = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        let user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Update user fields if provided
+        user.name = req.body.name || user.name;
+        user.phone = req.body.phone || user.phone;
+        user.email = req.body.email || user.email;
+        user.address.city_area = req.body.city_area || user.address.city_area;
+        user.address.district = req.body.district || user.address.district;
+        user.address.state = req.body.state || user.address.state;
+
+        // If a new profile image is uploaded, update the user's profile image path
+        if (req.file) {
+            user.profileimage = req.file.path;
+        }
+
+        const updatedUser = await user.save();
+
+        return res.status(200).json({
+            message: 'User updated successfully',
+            user: updatedUser
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+module.exports = { adminlogin, updateadmin, vendoredit, vendorupdate, getUserById, updateUserById };

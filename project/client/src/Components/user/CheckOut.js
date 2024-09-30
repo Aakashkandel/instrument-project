@@ -135,7 +135,7 @@ export default function CheckOut() {
               </div>
 
               <form class="lg:mt-16" onSubmit={handleSubmit}>
-                <div>
+                <div >
                   <h2 class="text-xl font-bold text-gray-800">Shipping info</h2>
 
                   <div class="grid sm:grid-cols-2 gap-8 mt-8">
@@ -148,7 +148,7 @@ export default function CheckOut() {
                     <input type="email" placeholder="Email address" value={values.email} onChange={handleChange} onBlur={handleBlur} name="email"
                       class="px-2 pb-2 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none" />
                     {errors.email && touched.email ? <div class="text-red-500">{errors.email}</div> : null}
-                  </div>
+                  </div> 
                   <div>
                     <input type="text" placeholder="Street address" vlaue={values.street} onChange={handleChange} onBlur={handleBlur} name="street"
                       class="px-2 pb-2 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none" />

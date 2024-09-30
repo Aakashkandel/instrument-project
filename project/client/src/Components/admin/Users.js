@@ -101,7 +101,7 @@ export default function Users() {
                   <td className="py-3 px-4 border-b">{user.phone}</td>
                   <td className="py-3 px-4 border-b">{user.email}</td>
                   <td className="py-3 px-4 border-b">
-                    {`${user.city_area}, ${user.district}, ${user.state}`}
+                    {`${user.address.city_area}, ${user.address.district}, ${user.address.state}`}
                   </td>
                   <td className="py-3 px-4 border-b">
                     {user.profileimage ? (
@@ -112,9 +112,9 @@ export default function Users() {
                   </td>
                   <td className="py-3 px-4 border-b text-center">
                     <div className="flex justify-center items-center space-x-4">
-                      {/* <Link to={`../useredit/${user._id}`}>
+                      <Link to={`../useredit/${user._id}`}>
                         <i className="fa-solid fa-pen text-blue-600 text-xl cursor-pointer"></i>
-                      </Link> */}
+                      </Link>
                       <i onClick={() => deleteUser(user._id)} className="fa-solid fa-trash text-red-600 text-xl cursor-pointer"></i>
                     </div>
                   </td>

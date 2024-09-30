@@ -67,7 +67,6 @@ export default function Userorder() {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.paymentStatus}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex space-x-2">
-                    <button className="text-blue-600 hover:text-blue-800">View</button>
                     {item.paymentStatus !== 'Paid' && (
                       <button
                         onClick={() => cancelOrder(item._id)}

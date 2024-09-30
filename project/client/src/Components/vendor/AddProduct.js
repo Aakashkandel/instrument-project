@@ -220,11 +220,17 @@ export default function AddProduct() {
                                         <div>
                                             <label className="text-white dark:text-gray-200" htmlFor="category">Select Category  <span className='text-red-400 text-xl '>*</span></label>
                                             <select name="category" value={values.category} onChange={handleChange} onBlur={handleBlur} id="category" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                                                <option value="computer">Guitar</option>
-                                                <option value="mobile">keyboard</option>
-                                                <option value="electronic">Electronic</option>
-                                                <option value="household">Acoustic</option>
-                                                <option value="household">Amplifer</option>
+                                                <option >Select Category</option>
+                                                <option value="Guitar">Guitar</option>
+                                                <option value="flute">Flute</option>
+                                                <option value="piano">Piano</option>
+                                                <option value="acoustic">Acoustic</option>
+                                                <option value="amplifer">Amplifer</option>
+                                                <option value="madal">Madal</option>
+                                                <option value="sitar">sitar</option>
+                                                <option value="electrical instrument">Electrical Instrument</option>
+                                                <option value="traditional instrument">Traditional Instrument</option>
+                                                <option value="others">others</option>
                                             </select>
                                             {errors.category && touched.category ? (<p className="text-red-500">{errors.category}</p>) : null}
                                         </div>

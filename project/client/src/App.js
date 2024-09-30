@@ -28,6 +28,7 @@ import Productview from './Components/user/Productview';
 import OrderProduct from './Components/vendor/OrderProduct';
 import Profile from './Components/user/Profile';
 import EditProduct from './Components/vendor/EditProduct';
+import AdminEditProduct from './Components/admin/EditProduct';
 import Adminrouter from './ProtectedRouter/Adminrouter';
 import AdminDashboard from './Components/admin/AdminDashboard';
 import AdminLogin from './Components/admin/AdminLogin';
@@ -36,6 +37,8 @@ import Vendors from './Components/admin/Vendors';
 import Users from './Components/admin/Users';
 import Ordert from './Components/admin/Order';
 import AboutUs from './Components/Aboutus';
+import EditVendor from './Components/admin/EditVendor';
+import UserEdit from './Components/admin/UserEdit';
 // import { orderplace } from '../../server/controllers/OrderController';
 
 
@@ -62,7 +65,7 @@ function App() {
             <Route index element={<Vendor/>}/>
             <Route path='dashboard'  element={<VendorProtected Component={Vendor}/>} />
             <Route path='addproduct'  element={<VendorProtected Component={AddProduct}/>} />
-            <Route path='profile' element={<VendorProfile />} />
+            <Route path='profile' element={<VendorProtected Component={VendorProfile} />} />
             <Route path='order' element={<VendorProtected Component={Order}/>} />
             <Route path='product' element={<VendorProtected Component={Product}/>} />
             <Route path='productview/:id' element={<VendorProtected Component={OrderProduct}/>}/>
@@ -86,15 +89,17 @@ function App() {
            
 
           </Route>
+          <Route path="admin/login" element={<Adminrouter Component={AdminLogin}/>}/>
           
           <Route path="/admin/" element={<Adminrouter Component={AdminRouter}/>}>
           <Route index element={<AdminDashboard/>}/>
-          <Route path="login" element={<Adminrouter Component={AdminLogin}/>}/>
           <Route path="dashboard" element={<Adminrouter Component={AdminDashboard}/>}/>
           <Route path="product" element={<Adminrouter Component={Allproduct}/>}/>
-          <Route path="productedit/:id" element={<Adminrouter Component={EditProduct}/>}/>
+          <Route path="productedit/:id" element={<Adminrouter Component={AdminEditProduct}/>}/>
           <Route path="allvendor" element={<Adminrouter Component={Vendors}/>}/>
+          <Route path="vendoredit/:id" element={<Adminrouter Component={EditVendor}/>}/>
           <Route path="users" element={<Adminrouter Component={Users}/>}/>
+          <Route path="useredit/:id" element={<Adminrouter Component={UserEdit}/>}/>
           <Route path="orders" element={<Adminrouter Component={Ordert}/>}/>
           
             

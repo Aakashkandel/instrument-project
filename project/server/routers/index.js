@@ -66,7 +66,7 @@ router.put('/decreasequantity/:id', auth, cartController.decreasequantity);
 // Profile Routes
 router.post('/profileapi', auth, profileController.profile);
 router.post('/addesewaapi', auth, profileController.addesewa);
-router.put('/updateesewaapi', auth, profileController.updateesewa);
+router.post('/updateesewaapi', auth, profileController.updateesewa);
 
 // Admin Bank Routes
 router.post('/addbankapi', adminbankController.addbank);
@@ -74,6 +74,10 @@ router.post('/addbankapi', adminbankController.addbank);
 //admin login
 router.post('/adminloginapi', AdminController.adminlogin);
 router.get('/adminregisterapi', AdminController.updateadmin);
+router.get('/adminvendorapi/:id',auth, AdminController.vendoredit);
+router.post('/adminvendorapi/:id',auth, AdminController.vendorupdate);
+router.get('/adminusers/:id',auth, AdminController.getUserById);
+router.post('/adminusersupdate/:id',auth,upload.single('profileimage'),AdminController.updateUserById);
 // router.get('/adminproductapi', AdminController.allProduct);
 // router.get('/adminorderapi', AdminController.fetchorder);
 router.get('/adminvendorapi', auth,userControllers.fetchallvendor);
@@ -91,6 +95,7 @@ router.get('/totalproducts',auth,AdminDashboardController.totalproduct);
 router.get('/latestproducts',auth,AdminDashboardController.latestproduct);
 router.get('/latestorders',auth,AdminDashboardController.latestorder);
 router.get('/latestusers',auth,AdminDashboardController.latestuser);
+
 
 
 

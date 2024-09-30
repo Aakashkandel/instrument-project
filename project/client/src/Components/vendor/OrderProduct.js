@@ -82,11 +82,11 @@ export default function Product() {
   <div className="space-y-4">
     <div className="flex justify-between">
       <span className="font-medium text-gray-700">Customer Name:</span>
-      <span className="text-gray-600">{order.customer}</span>
+      <span className="text-gray-600">{order.shippingDetails.name}</span>
     </div>
     <div className="flex justify-between">
       <span className="font-medium text-gray-700">Address:</span>
-      <span className="text-gray-600">{order.shippingDetails.address}</span>
+      <span className="text-gray-600">{order.shippingDetails.street}</span>
     </div>
     <div className="flex justify-between">
       <span className="font-medium text-gray-700">City:</span>
@@ -95,7 +95,7 @@ export default function Product() {
    
     <div className="flex justify-between">
       <span className="font-medium text-gray-700">Postal Code:</span>
-      <span className="text-gray-600">{order.shippingDetails.postalCode}</span>
+      <span className="text-gray-600">{order.shippingDetails.postal}</span>
     </div>
   
   
@@ -161,7 +161,7 @@ export default function Product() {
           </button>
         </div>
       </div>
-      //back button
+     
       <div className="flex justify-center mt-4">
        <a href="/vendors/order" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
         </div>

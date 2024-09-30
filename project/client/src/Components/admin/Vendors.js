@@ -2,7 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/api'; // Adjust the path if needed
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 export default function Vendors() {
   const [vendors, setVendors] = useState([]);
@@ -54,6 +59,9 @@ export default function Vendors() {
           'x-access-token': localStorage.getItem('token')
         }
       });
+      setTimeout(() => {
+        toast.success('Vendor deleted successfully');
+      }, 100);
       console.log(response);
       getVendors();
     } catch (err) {
@@ -90,7 +98,11 @@ export default function Vendors() {
               <th className="py-3 px-4 border-b text-left text-gray-700">Phone</th>
               <th className="py-3 px-4 border-b text-left text-gray-700">Email</th>
               <th className="py-3 px-4 border-b text-left text-gray-700">Address</th>
+
               <th className="py-3 px-4 border-b text-left text-gray-700">Profile Image</th>
+
+              <th className="py-3 px-4 border-b text-left text-gray-700">Pan no.</th>
+              <th className="py-3 px-4 border-b text-left text-gray-700">EsewaId</th>
               <th className="py-3 px-4 border-b text-center text-gray-700">Action</th>
             </tr>
           </thead>
@@ -112,10 +124,11 @@ export default function Vendors() {
                       <span>No Image</span>
                     )}
                   </td>
+                  <td className="py-3 px-4 border-b">{vendor.panno}</td>
+                  <td className="py-3 px-4 border-b">{vendor.esewaid}</td>
                   <td className="py-3 px-4 border-b text-center">
                     <div className="flex justify-center items-center space-x-4">
-                      <Link to={`../vendoredit/${vendor._id}`}>
-                      </Link>
+                    <Link to={`../vendoredit/${vendor._id}`}> <i className="fa-solid fa-edit text-blue-600 text-xl cursor-pointer"></i></Link>
                     
                         <i onClick={() => deleteVendor(vendor._id)} className="fa-solid fa-trash text-red-600 text-xl cursor-pointer"></i>
                   

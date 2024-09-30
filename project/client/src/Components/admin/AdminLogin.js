@@ -19,7 +19,6 @@ export default function AdminLogin() {
                 }
             });
             
-       
             console.log('Login successful:', response.data);
             // Redirect or handle successful login here (e.g., save token to local storage and navigate)
             localStorage.setItem('token', response.data.token);
@@ -28,6 +27,11 @@ export default function AdminLogin() {
             console.error('Login error:', error);
             setError(error.response?.data?.message || 'An error occurred during login.');
         }
+    };
+
+    // Function to handle Home button click
+    const handleHomeClick = () => {
+        navigate('/');  // Redirect to home page
     };
 
     return (
@@ -71,6 +75,15 @@ export default function AdminLogin() {
                         </div>
                     </div>
                 </form>
+                <div className="flex justify-center mt-4">
+                    {/* Home button */}
+                    <button 
+                        onClick={handleHomeClick} 
+                        className="py-2 px-4 bg-gray-300 text-gray-700 font-semibold rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    >
+                        Home
+                    </button>
+                </div>
             </div>
         </div>
     );
